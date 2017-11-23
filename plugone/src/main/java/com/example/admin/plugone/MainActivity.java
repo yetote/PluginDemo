@@ -12,7 +12,7 @@ import android.widget.Toast;
  *         2017/11/20 10:45
  */
 public class MainActivity extends BaseActivity implements View.OnClickListener {
-    private Button btn;
+    private Button btn, matisseBtn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -20,10 +20,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         initViews();
         btn.setOnClickListener(this);
+        matisseBtn.setOnClickListener(this);
     }
 
     private void initViews() {
         btn = findViewById(R.id.btn);
+        matisseBtn = findViewById(R.id.matisse_btn);
     }
 
     @Override
@@ -34,6 +36,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 i.setClass(that, SecondActivity.class);
                 startActivity(i);
                 Toast.makeText(that, "您点击击了按钮", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.matisse_btn:
+                
                 break;
             default:
                 return;

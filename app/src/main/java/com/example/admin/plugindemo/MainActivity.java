@@ -8,17 +8,22 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.jar.Manifest;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button load, click;
     public static final int PERMISSION_READ_SDCARD = 1;
-
+    private RecyclerView rv;
+    private ArrayList<String> list;
+    private MyAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,11 +35,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         load.setOnClickListener(this);
         click.setOnClickListener(this);
+
+        list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        list.add("4");
+        list.add("5");
+        list.add("6");
+        list.add("7");
+        list.add("8");
+        list.add("9");
+        list.add("10");
+
+        rv.setLayoutManager(new LinearLayoutManager(this));
+
+        adapter = new MyAdapter(this, list);
+        rv.setAdapter(adapter);
     }
 
     private void initViews() {
         load = findViewById(R.id.load);
         click = findViewById(R.id.click);
+        rv=findViewById(R.id.rv);
     }
 
     @Override
@@ -62,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 加载sd卡中的插件apk
      */
     private void loadAPK() {
-        File file = new File(Environment.getExternalStorageDirectory(), "download/plugin.apk");
+        File file = new File("sdcard/Download","plugin.apk");
         PluginManager.getInstance().loadPath(file.getAbsolutePath());
     }
 
